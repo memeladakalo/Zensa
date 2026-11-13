@@ -8,7 +8,7 @@ services:
     runtime: docker
     plan: free          # free tier (sleeps after ~15 min inactivity)
     region: frankfurt   # change if you prefer (oregon, singapore, etc.)
-    branch: main        # or master
+    branch: master      # or master
     rootDir: zensa-api/zensa-api   # path to the Gradle project (adjust if needed)
     dockerfilePath: Dockerfile
     envVars:
