@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- AppCompat parent is required because MainActivity extends AppCompatActivity
+         (needed for in-app language switching on Android 12 and below). -->
+    <style name="Theme.Zensa" parent="Theme.AppCompat.Light.NoActionBar" />
+</resources>

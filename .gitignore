@@ -1,0 +1,37 @@
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+# --- Added in Part 2 error-correction pass ---
+.idea/
+*.iml
+local.properties
+# Build/diagnostic logs
+ksp-*.txt
+# Signing material and secrets - NEVER commit
+*.jks
+*.keystore
+keystore.properties
+.env
+# Backend build output
+zensa-api/**/build/
+zensa-api/**/.gradle/
+
+# --- Part 3 additions ---
+# Firebase config (project specific; supply via the GOOGLE_SERVICES_JSON secret in CI)
+app/google-services.json
+# Firebase service-account key and any local env files for the backend
+*-firebase-adminsdk-*.json
+zensa-api/**/.env
