@@ -25,7 +25,7 @@ object AppConstants {
      * We are NOT using this yet — it is here so that when we build the
      * network layer in a later step, we just reference this constant.
      */
-    const val API_BASE_URL_DEV = "https://socket-eyed-screensaver-whom.trycloudflare.com/"
+    const val API_BASE_URL_DEV = "https://zensa-api-g0n5.onrender.com/"
 
     /**
      * Version of the local Room database schema.

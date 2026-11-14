@@ -85,7 +85,7 @@ android {
             buildConfigField(
                 "String",
                 "API_BASE_URL",
-                "\"https://socket-eyed-screensaver-whom.trycloudflare.com/\""
+                "\"https://zensa-api-g0n5.onrender.com/\""
             )
         }
 
@@ -95,7 +95,7 @@ android {
             buildConfigField(
                 "String",
                 "API_BASE_URL",
-                "\"https://zensa-api.azurewebsites.net/\""
+                "\"https://zensa-api-g0n5.onrender.com/\""
             )
 
             signingConfigs.findByName("release")?.let {
