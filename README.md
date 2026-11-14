@@ -1,217 +1,122 @@
-# Zensa – Student Productivity & Study Management App
+Zensa – Student Productivity & Study Management App
+Tagline: Calm, Focused Studying.
 
-**Tagline: Calm, Focused Studying.**
+About the Project
+Zensa is an Android student productivity and study management application. It helps students organise modules, manage assignments, take study notes, run focused study sessions, track progress, and earn achievements.
 
-## 📖 About the Project
+The name Zensa combines Zen and Sense — a calm, organised approach to studying.
 
-Zensa is an Android-based student productivity and study management application designed to help students organise their academic responsibilities, manage assignments, create study notes, track progress, and develop consistent study habits.
+Key Features
+Feature	Description
+Authentication	Email/password + Google Sign-In (OAuth 2.0 / PKCE)
+Dashboard	Overview of modules, assignments, and study activity
+Modules	Create and manage academic modules
+Assignments	Track deadlines and subtasks
+Study Notes	Create and organise notes
+Zen Timer	Focused study sessions
+Achievements	Progress and milestone tracking
+Offline Support	Local Room database with sync
+Push Notifications	Deadline reminders (Firebase Cloud Messaging)
+Tech Stack
+Android
+Kotlin + Jetpack Compose
+Room (local database)
+DataStore (preferences)
+Retrofit + OkHttp
+AppAuth (Google Sign-In with PKCE)
+Backend
+Spring Boot 3.4 (Kotlin)
+Spring Security + JWT
+Spring Data JPA + Hibernate
+MySQL
+Infrastructure
+Backend hosting: Render (free tier)
+Database: Railway MySQL (public TCP proxy)
+Source control: GitHub
+Architecture
+┌─────────────────────────┐
+│   Zensa Android App     │
+│   (Kotlin / Compose)    │
+└───────────┬─────────────┘
+            │ HTTPS / JSON
+            ▼
+┌─────────────────────────┐
+│  Spring Boot API        │
+│  (Render)               │
+│  https://zensa-api-g0n5 │
+│  .onrender.com          │
+└───────────┬─────────────┘
+            │ JDBC
+            ▼
+┌─────────────────────────┐
+│  MySQL Database         │
+│  (Railway)              │
+└─────────────────────────┘
+For Lecturers / Evaluators
+If you only need to run the app (no development setup required):
 
-The name **Zensa** combines the ideas of *Zen* and *Sense*, representing a calm, organised, and focused approach to studying.
+Download the latest app-debug.apk (or the release APK provided with the submission).
+On your Android phone:
+Open Settings → Security (or Settings → Apps → Special app access).
+Allow installation from the source you will use (Files / Chrome / etc.).
+Transfer the APK to the phone (USB, email, Google Drive, etc.).
+Open the APK file and tap Install.
+Open the Zensa app.
+Note: The app talks to a live backend hosted on Render. The first request after a period of inactivity can take 30–60 seconds while the free-tier server wakes up. This is normal.
 
-The application provides students with a centralised platform for managing their academic activities while encouraging productivity through study sessions, progress tracking, and achievements.
+The Google Sign-In option requires a Google account. Email/password registration is also available.
 
-## 🎯 Project Objectives
+Getting Started
+Prerequisites
+Android Studio (latest stable)
+JDK 21
+A Google Cloud project with an OAuth Android client ID
+Railway MySQL instance (or any MySQL) with public access
+Render account (for backend deployment)
+Android App Setup
+Clone the repository.
+Create local.properties in the project root (do not commit it):
+sdk.dir=C\:\\path\\to\\Android\\Sdk
+zensa.google.clientId=YOUR_ANDROID_CLIENT_ID.apps.googleusercontent.com
+Open the project in Android Studio and sync Gradle.
+The app uses BuildConfig.API_BASE_URL (currently pointing at the live Render service).
+Backend Setup (Local)
+cd zensa-api/zensa-api
+./gradlew bootRun
+Required environment variables:
 
-- Provide a centralised platform for managing academic activities.
-- Help students organise modules and assignments.
-- Allow students to create and manage study notes.
-- Encourage effective time management through a study timer.
-- Track academic progress and achievements.
-- Provide secure user authentication.
-- Support Google Single Sign-On (SSO) through Firebase Authentication.
-- Enable communication between the Android application and a backend REST API.
+Variable	Description
+DB_URL	JDBC URL to MySQL
+DB_USERNAME	Database user
+DB_PASSWORD	Database password
+JWT_SECRET	At least 32 characters
+GOOGLE_CLIENT_IDS	Comma-separated Google client IDs
+Deployed Environment
+The live API is hosted on Render:
 
-## ✨ Key Features
+https://zensa-api-g0n5.onrender.com
 
-| Feature | Description |
-|---|---|
-| User Registration | Allows students to create accounts. |
-| User Authentication | Supports secure email and password login. |
-| Google Single Sign-On (SSO) | Allows users to sign in using their existing Google accounts through Firebase Authentication. |
-| Dashboard | Provides a centralised overview of student activities. |
-| Modules | Organise and manage academic modules. |
-| Assignments | Create, view, and manage assignments. |
-| Study Notes | Create and manage study notes. |
-| Zen Timer | Use a study timer to support focused learning. |
-| Achievements | Track study progress and accomplishments. |
-| Settings | Manage application preferences. |
-| REST API Integration | Communicate with the backend service. |
-| Offline Support | Support selected local data operations and synchronisation. |
-| Push Notifications | Support notifications for relevant application updates. |
+Database credentials are stored as environment variables on the Render service (never committed).
 
-## 🛠️ Technologies Used
+Google Sign-In
+The app uses the AppAuth library with the Authorization Code + PKCE flow. No client secret is required on the device.
 
-### Android Development
-- Kotlin
-- Android Studio
-- Jetpack Compose
-- Android SDK
-- Gradle
+Client ID is injected at build time from local.properties → BuildConfig.GOOGLE_CLIENT_ID
+Redirect scheme is derived automatically (com.googleusercontent.apps.<client-id-prefix>)
+Security Notes
+No secrets are committed to the repository.
+local.properties, keystore files, and service-account JSON files are gitignored.
+JWT secret and database credentials live only in environment variables on Render / Railway.
+Project Structure
+Zensa/
+├── app/                          # Android application
+│   └── src/main/java/com/zensa/app/
+├── zensa-api/zensa-api/          # Spring Boot backend
+│   └── src/main/kotlin/com/zensa/api/
+├── local.properties              # Local config (gitignored)
+└── README.md
+License
+This project is for educational / portfolio use.
 
-### Backend Development
-- Java
-- Spring Boot
-- RESTful API
-- JSON
-
-### Database and Data Management
-- Room Database
-- MySQL
-- DataStore
-
-### Authentication and Cloud Services
-- Firebase Authentication
-- Google Sign-In
-- Firebase Cloud Messaging
-
-### Additional Tools and Technologies
-- Git
-- GitHub
-- Cloudflare Tunnel (development API connectivity)
-
-## 🔐 Google Single Sign-On (SSO)
-
-Zensa implements Google Single Sign-On (SSO) using Firebase Authentication.
-
-This feature allows students to access the application using their existing Google accounts instead of creating a separate Zensa password.
-
-### Authentication Process
-
-1. The student opens the Zensa login screen.
-2. The student selects the Google Sign-In option.
-3. Google authenticates the user's account.
-4. Firebase Authentication processes the authentication result.
-5. Once authentication is successful, the student can access the Zensa application.
-
-This integration provides a convenient authentication experience while reducing the need for users to manage another set of login credentials.
-
-## 🏗️ System Architecture
-
-Zensa follows a client-server architecture.
-
-```text
-+-----------------------------+
-|       Zensa Android App     |
-|        (Kotlin/Compose)     |
-+--------------+--------------+
-               |
-               | HTTPS / JSON
-               |
-+--------------v--------------+
-|       Spring Boot API       |
-|       REST Endpoints        |
-+--------------+--------------+
-               |
-               |
-+--------------v--------------+
-|        MySQL Database       |
-+-----------------------------+
-
-       Authentication
-               |
-               v
-+-----------------------------+
-|     Google Sign-In          |
-+--------------+--------------+
-               |
-               v
-+-----------------------------+
-|     Firebase Authentication|
-+-----------------------------+
-```
-
-The Android application communicates with the backend through REST API endpoints. Firebase Authentication handles Google Sign-In, while local storage supports selected application functionality and data management.
-
-## 🎨 Application Design
-
-Zensa uses a modern and student-friendly interface designed around simplicity, accessibility, and productivity.
-
-**Colour palette:**
-- Deep Purple
-- Soft Lavender
-- Baby Pink
-- White
-
-The interface uses rounded cards, clear navigation, and organised layouts to create a calm study environment.
-
-## 📱 Application Screens
-
-The application includes the following screens:
-
-1. Splash Screen
-2. Login Screen
-3. Registration Screen
-4. Home Dashboard
-5. Modules
-6. Assignments
-7. Assignment Details
-8. Study Notes
-9. Zen Timer
-10. Settings
-11. Achievements
-
-## ⚙️ Installation and Setup
-
-### Requirements
-
-- Android Studio
-- Android SDK
-- JDK compatible with the project's Gradle configuration
-- Git
-- Android device or emulator
-
-### Steps
-
-1. Clone the repository:
-
-```bash
-git clone https://github.com/memeladakalo/Zensa-Mobile-App.git
-```
-
-2. Open Android Studio.
-3. Select **Open** and choose the cloned project folder.
-4. Allow Gradle to synchronise.
-5. Configure Firebase using the appropriate Firebase project configuration.
-6. Configure the backend API URL for your development environment.
-7. Start the Spring Boot backend if backend connectivity is required.
-8. Connect an Android device or start an emulator.
-9. Click **Run** in Android Studio.
-
-**Note:** Replace the repository URL if you choose a different GitHub repository name. Backend environment variables, Firebase configuration, and database credentials must be configured separately. Never commit private credentials, service account files, or secret keys.
-
-## 🔒 Security
-
-Zensa incorporates security considerations including:
-
-- Firebase Authentication for Google Sign-In.
-- Secure user authentication.
-- Password protection for email and password accounts.
-- HTTPS communication with the backend API.
-- Controlled access to application functionality.
-- Appropriate handling of sensitive configuration values.
-
-## 🚀 Future Improvements
-
-- Improve offline synchronisation.
-- Expand study analytics and reporting.
-- Introduce additional gamification features.
-- Improve notification personalisation.
-- Enhance accessibility and user experience.
-- Expand automated testing.
-
-## 👩‍💻 Developer
-
-**Thembela Memela**
-
-Final-Year Diploma in Information Technology (Software Development) Student  
-IIE Rosebank International University College
-
-GitHub: [@memeladakalo](https://github.com/memeladakalo)
-
-## 📚 Project Purpose
-
-Zensa is an academic software development project focused on applying Android development, database management, API integration, authentication, software engineering, and user interface design principles to solve a practical student productivity problem.
-
----
 
 **Zensa – Calm, Focused Studying.**
