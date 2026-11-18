@@ -2,7 +2,8 @@ Zensa – Calm, Focused Studying
 
 Zensa is an Android study-companion app that helps students organise modules, manage assignments, keep study notes, run focused study sessions and track their progress, all in one place. The name combines Zen and Sense: a calm, organised approach to studying.
 
-Demo video: Watch the Zensa demonstration video
+Demo video: 
+PowerPoint on YouTube: https://studio.youtube.com/video/Smow0cRn1-0/edit 
 Live API: https://zensa-api-g0n5.onrender.com
 Platform: Android 8.0 (API 26) or higher · Tested on a Samsung Galaxy A04e
 
@@ -39,7 +40,7 @@ Offline support	Local Room database with a sync queue that uploads changes when 
 
 Screenshots
 
-Screenshots of every screen (Splash, Login, Registration, Dashboard, Modules, Assignments, Notes, Zen Timer, Achievements, Settings, Google Sign-In) and of the Render and Railway evidence are included in the project report. They are also shown in the demonstration video linked at the top of this page.
+Screenshots of every screen (Splash, Login, Registration, Dashboard, Modules, Assignments, Notes, Zen Timer, Achievements, Settings, Google Sign-In) and of the Render and Railway evidence are included in the project report.
 
 Quick start for lecturers and evaluators
 
