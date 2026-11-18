@@ -2,7 +2,8 @@ Zensa – Calm, Focused Studying
 
 Zensa is an Android study-companion app that helps students organise modules, manage assignments, keep study notes, run focused study sessions and track their progress, all in one place. The name combines Zen and Sense: a calm, organised approach to studying.
 
-Demo video: 
+Demo 1 Video: https://youtu.be/Sodpya5N2ec 
+Demo 2 video: https://youtu.be/O05h7ewLBSk 
 PowerPoint on YouTube: https://studio.youtube.com/video/Smow0cRn1-0/edit 
 Live API: https://zensa-api-g0n5.onrender.com
 Platform: Android 8.0 (API 26) or higher · Tested on a Samsung Galaxy A04e
